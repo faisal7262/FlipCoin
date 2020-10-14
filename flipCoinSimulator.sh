@@ -3,13 +3,8 @@
 
 head=0;
 tail=0;
-
-#using loop uc2
-
-read -p "Enter a number for flip coin :" n
-
-for (( i=0; i<n; i++ ))
-{
+while [ "$head" -lt 21 ] && [ "$tail" -lt 21 ]
+do
 	a=$((RANDOM%2));
 
 	if [[ a -eq 1 ]]
@@ -18,7 +13,14 @@ for (( i=0; i<n; i++ ))
 		else
 			tail=$((tail+1))
 	fi
-}
+done
 
-echo "number of head win" $head
-echo "number of tail win" $tail
+if [ "$head" -eq 21 ] && [ "$tail" -eq 21 ]
+then
+	echo "it is a tie"
+elif [ "$head" -eq 21 ]
+then
+	echo "head won by " $(($head-$tail))
+else
+	echo "tail won by " $(($tail-$head))
+fi
